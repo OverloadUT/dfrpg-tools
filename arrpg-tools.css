@@ -1,0 +1,88 @@
+/* CSS declarations go here */
+@font-face {
+  font-family: MelroseModernRoboOne;
+  src: url("/MelroseModernOneSGOT.otf") format("opentype");
+  /* Exclude AINR from this font, and use style Two for them */
+  unicode-range: U+0-0040, U+0042-0048, U+004A-004D, U+004F-0051, U+0053-10FFFF
+}
+
+@font-face {
+  font-family: MelroseModernRoboTwo;
+  src: url("/MelroseModernTwoSGOT.otf") format("opentype");
+  /* Only use AINR from this version of Melrose Modern */
+  unicode-range: U+0041, U+0049, U+004E, U+0052
+}
+
+body {
+  font-family: "chaparral-pro";
+}
+
+.arrpg-card, .arrpg-megastunt {
+  margin: 10px;
+  padding: 11px 14px;
+  width: 275px;
+  background-color: #BDD1EC;
+
+  border: 2px solid #00639f;
+  border-radius: 18px/16px 0px;
+
+  -webkit-box-shadow: 4px 4px 0px 0px rgba(0,122,194,1);
+  -moz-box-shadow: 4px 4px 0px 0px rgba(0,122,194,1);
+  box-shadow: 4px 4px 0px 0px rgba(0,122,194,1);
+}
+
+.arrpg-aspect {
+  font-family: "gooddog-new";
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+
+  border-radius: 18px/16px;
+}
+
+.arrpg-megastunt h3 {
+  color: #007AC2;
+  margin: 0 4px 8px;
+  text-transform: uppercase;
+  font-family: MelroseModernRoboOne, MelroseModernRoboTwo;
+  letter-spacing: 0.02em;
+  font-size: 1.4em;
+}
+
+.arrpg-megastunt h4 {
+  color: #007AC2;
+  margin: 8px 0;
+  text-transform: uppercase;
+  font-family: MelroseModernRoboOne, MelroseModernRoboTwo;
+  /*letter-spacing: 0.04em;*/
+  font-size: 1.10em;
+}
+
+.arrpg-megastunt ul {
+  list-style: none;
+  padding:0;
+  margin:0;
+}
+
+.arrpg-megastunt .aspects .label {
+  font-weight: normal;
+  font-style: normal;
+}
+
+.arrpg-megastunt li {
+  margin-bottom: 6px;
+}
+
+.arrpg-megastunt .aspects li {
+  font-weight: bold;
+  font-style: italic;
+  padding-left: 1em;
+  text-indent: -1.24em;
+}
+
+.arrpg-megastunt .aspects li:before {
+  font-style: normal;
+  font-size: larger;
+  content: "▼ ";
+  color: #007ac2;
+}
