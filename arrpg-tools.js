@@ -14,6 +14,17 @@ if (Meteor.isClient) {
       Session.set('counter', Session.get('counter') + 1);
     }
   });
+
+  Template.arrpg_characters.helpers({
+    characters: [
+      {name: "Alice", aspects: [
+        {aspectname: "Cybernetic Adrenaline Junkie"},
+        {aspectname: "I’m basically a tank"},
+        {aspectname: "Subtlety is for bitches"},
+        {aspectname: "But I’m street smart!"}
+      ]},
+    ]
+  });
 }
 
 if (Meteor.isServer) {

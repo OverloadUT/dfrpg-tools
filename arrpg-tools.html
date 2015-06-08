@@ -8,7 +8,7 @@
   <h1>ARRPG Tools</h1>
 
   {{> arrpg_megastunt}}
-  {{> arrpg_aspect}}
+  {{> arrpg_characters}}
 </body>
 
 <template name="hello">
@@ -31,4 +31,15 @@
   <div class="arrpg-card arrpg-aspect">
     Everything is on fire!
   </div>
+</template>
+
+<template name="arrpg_characters">
+  {{#each characters}}
+    <div class="character-name">{{name}}</div>
+    {{#each aspects}}
+      <div class="arrpg-card arrpg-aspect">
+        {{aspectname}}
+      </div>
+    {{/each}}
+  {{/each}}
 </template>
