@@ -7,17 +7,14 @@
 <body>
   <h1>ARRPG Tools</h1>
 
-  {{> arrpg_megastunt}}
+  <!-- {{> arrpg_megastunt}} -->
   {{> arrpg_characters}}
+
+  {{> arrpg_npcs}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
 <template name="arrpg_megastunt">
-  <div class="arrpg-megastunt">
+  <div class="arrpg-card arrpg-megastunt">
     <h3>Reflex Armor</h3>
     <h4>Aspects:</h4>
     <ul class="aspects">
@@ -35,11 +32,34 @@
 
 <template name="arrpg_characters">
   {{#each characters}}
-    <div class="character-name">{{name}}</div>
+    <div class="arrpg-card arrpg-character">
+    <h3 class="character-name">{{name}}</h3>
+    <ul class="aspects strong">
     {{#each aspects}}
-      <div class="arrpg-card arrpg-aspect">
-        {{aspectname}}
-      </div>
+      <li>{{aspectname}}</li>
     {{/each}}
+    </ul>
+    </div>
+  {{/each}}
+</template>
+
+<template name="arrpg_npcs">
+  {{#each characters}}
+    <div class="arrpg-card arrpg-npc">
+    <h3 class="character-name">{{name}}</h3>
+        <h4>Modes and Skills:</h4>
+        <ul class="skills medium">
+            {{#each modes}}
+                <li>{{moderank}} ({{modevalue}}) {{modename}}</li>
+            {{/each}}
+        </ul>
+
+        <h4>Aspects:</h4>
+        <ul class="aspects medium">
+          {{#each aspects}}
+            <li>{{aspectname}}</li>
+          {{/each}}
+        </ul>
+    </div>
   {{/each}}
 </template>
