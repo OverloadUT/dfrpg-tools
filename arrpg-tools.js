@@ -57,10 +57,25 @@ if (Meteor.isClient) {
         {
           modename: "Action",
           moderank: "Good",
-          modevalue: "+3"
+          modevalue: 3,
+          upgradedskills: [
+            {
+              skillname: "Combat",
+              skillvalue: 5
+            }
+          ]
         }
       ]}
     ]
+  });
+
+  Template.registerHelper('skillnum', function(num) {
+    var out = num.toString();
+    if(num >= 0) {
+      out = '+' + out;
+    }
+
+    return new Handlebars.SafeString(out);
   });
 }
 
