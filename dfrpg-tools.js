@@ -1,8 +1,22 @@
+var SKILL_RANKS = {
+  '8': 'Legendary',
+  '7': 'Epic',
+  '6': 'Fantastic',
+  '5': 'Superb',
+  '4': 'Great',
+  '3': 'Good',
+  '2': 'Fair',
+  '1': 'Average',
+  '0': 'Mediocre',
+  '-1': 'Poor',
+  '-2': 'Terrible'
+};
+
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
 
-  Template.arrpg_characters.helpers({
+  Template.dfrpg_characters.helpers({
     characters: [
       {name: "Alice", aspects: [
         {aspectname: "Cybernetic Adrenaline Junkie"},
@@ -48,32 +62,41 @@ if (Meteor.isClient) {
     ]
   });
 
-  Template.arrpg_npcs.helpers({
+  Template.dfrpg_npcs.helpers({
     characters: [
-      {name: "M12 Infantry (Nameless NPC)", aspects: [
-        {aspectname: "Well-Armed Soldier"},
-        {aspectname: "Tactical Maneuvers"}
-      ], modes: [
+      {
+        name: "Elder Gruff",
+        aspects: [
+          {aspectname: "Elder Gruff", type: 'highconcept'},
+          {aspectname: "Sense of Honor", type: 'other'},
+          {aspectname: "Sword as Long as a Car", type: 'other'}
+        ], skills: [
         {
-          modename: "Action",
-          moderank: "Good",
-          modevalue: 3,
-          upgradedskills: [
-            {
-              skillname: "Combat",
-              skillvalue: 5
-            }
-          ]
+          skillname: "Alertness",
+          skillrank: 2
         }
       ]}
-    ]
+    ],
+    highconcept: function() {
+      return this.aspects.filter(function(elem) {return elem.type==='highconcept'})[0].aspectname;
+    },
+    otheraspects: function() {
+      var skills = this.aspects.filter(function(aspect) {return aspect.type!=='highconcept'});
+      var skillnames = skills.map(function(aspect) {return aspect.aspectname});
+
+      return skillnames.join(', ');
+    }
   });
 
-  Template.registerHelper('skillnum', function(num) {
-    var out = num.toString();
-    if(num >= 0) {
-      out = '+' + out;
+  Template.registerHelper('skilldisplay', function(rank) {
+    var ranknum = rank.toString();
+    if(rank >= 0) {
+      ranknum = '+' + ranknum;
     }
+
+    var rankname = SKILL_RANKS[rank.toString()];
+
+    var out = rankname + ' (' + ranknum + ')';
 
     return new Handlebars.SafeString(out);
   });

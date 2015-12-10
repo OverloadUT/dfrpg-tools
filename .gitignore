@@ -5,6 +5,7 @@
 
 .meteor/local
 .meteor/meteorite
+.idea
 
 # =========================
 # Operating System Files

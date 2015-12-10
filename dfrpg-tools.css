@@ -18,7 +18,7 @@ body {
   color: #003459;
 }
 
-.arrpg-card {
+.dfrpg-card {
   float: left;
   margin: 10px;
   padding: 11px 14px;
@@ -35,7 +35,7 @@ body {
   page-break-inside: avoid;
 }
 
-.arrpg-aspect {
+.dfrpg-aspect {
   font-family: "gooddog-new", serif;
   text-align: center;
   font-size: 1.5em;
@@ -44,7 +44,7 @@ body {
   border-radius: 18px/16px;
 }
 
-.arrpg-card h3 {
+.dfrpg-card h3 {
   color: #007AC2;
   margin: 0 4px 8px;
   text-transform: uppercase;
@@ -53,7 +53,7 @@ body {
   font-size: 1.4em;
 }
 
-.arrpg-card h4 {
+.dfrpg-card h4 {
   color: #007AC2;
   margin: 8px 0;
   text-transform: uppercase;
@@ -62,63 +62,68 @@ body {
   font-size: 1.10em;
 }
 
-.arrpg-card ul {
+.dfrpg-card ul {
   list-style: none;
-  padding:0;
+  padding:0 0 0 1em;
   margin:0;
 }
 
-.arrpg-card .aspects .label {
+.dfrpg-card .aspects {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
+.dfrpg-card .aspects .label {
   font-weight: normal;
   font-style: normal;
 }
 
-.arrpg-card li {
+.dfrpg-card li {
   margin-bottom: 6px;
 }
 
-.arrpg-card ul.strong li {
+.dfrpg-card ul.strong li {
   font-weight: bold;
   font-style: italic;
   padding-left: 1em;
   text-indent: -1.5em;
 }
 
-.arrpg-card ul.strong li:before {
+.dfrpg-card ul.strong li:before {
   font-style: normal;
   font-size: larger;
   content: "▼ ";
   color: #007ac2;
 }
 
-.arrpg-card ul.medium li {
+.dfrpg-card ul.medium li {
   font-weight: bold;
   font-style: italic;
   padding-left: 1em;
 }
 
-.arrpg-card ul.medium li:before {
+.dfrpg-card ul.medium li:before {
   font-style: normal;
   font-size: larger;
   color: #007ac2;
 }
 
-.arrpg-card ul.short {
+.dfrpg-card ul.short {
   display: inline;
   list-style: none;
 }
 
-.arrpg-card ul.short li {
+.dfrpg-card ul.short li {
   font-weight: bold;
   font-style: italic;
   color: #007ac2;
   display: inline;
 }
 
-.arrpg-card ul.short li:after {
+.dfrpg-card ul.short li:after {
   content: ", ";
 }
 
-.arrpg-card ul.short li:last-child:after {
+.dfrpg-card ul.short li:last-child:after {
    content: "";
  }
