@@ -71,9 +71,43 @@ if (Meteor.isClient) {
           {aspectname: "Sense of Honor", type: 'other'},
           {aspectname: "Sword as Long as a Car", type: 'other'}
         ], skills: [
+          {
+            skillname: "Alertness",
+            rank: 2
+          },{
+            skillname: "Athletics",
+            rank: 3
+          },
+        ],
+        skillnotes: "Most other physical skills default to Fair, the rest to Average.",
+        stunts: [
+          {
+            stuntname: "Hunter",
+            stuntskill: "Survival",
+            description: "Use Survival instead of investigation when tracking prey."
+          }
+        ],
+        powers: [
+          {
+            powername: "Claws",
+            cost: -1,
+            description: "Fists gain **Weapon:2**"
+          },
+          {
+            powername: "Echoes of the Beast",
+            cost: -1,
+            extra: "(Goat)"
+          }
+        ]
+      },
+      {
+        name: "Goblin",
+        aspects: [
+          {aspectname: "Hunter Goblin", type: 'highconcept'}
+        ], skills: [
         {
           skillname: "Alertness",
-          skillrank: 2
+          rank: 2
         }
       ]}
     ],
@@ -97,6 +131,15 @@ if (Meteor.isClient) {
     var rankname = SKILL_RANKS[rank.toString()];
 
     var out = rankname + ' (' + ranknum + ')';
+
+    return new Handlebars.SafeString(out);
+  });
+
+  Template.registerHelper('stuntdisplay', function(stunt) {
+    var out = stunt.stuntname;
+    if(stunt.stuntskill) {
+      out = out + " (" + stunt.stuntskill + ")";
+    }
 
     return new Handlebars.SafeString(out);
   });

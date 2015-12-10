@@ -48,15 +48,36 @@
     <div class="dfrpg-card dfrpg-npc">
     <h3 class="character-name">{{name}}</h3>
         <div class="aspects highconcept"><strong>High Concept:</strong> {{highconcept}}</div>
-        <div class="aspects otheraspects"><strong>Other Aspects:</strong> {{otheraspects}}</div>
+        {{#if otheraspects}}<div class="aspects otheraspects"><strong>Other Aspects:</strong> {{otheraspects}}</div>{{/if}}
         <h4>Skills</h4>
             <ul class="skills">
-            {{#each skills}}
-                <li><strong>{{skillname}}:</strong> {{skilldisplay skillrank}}</li>
-            {{/each}}
+                {{#each skills}}
+                    <li><strong>{{skillname}}:</strong> {{skilldisplay rank}}</li>
+                {{/each}}
+                {{#if skillnotes}}
+                    <li>{{skillnotes}}</li>
+                {{/if}}
             </ul>
-        <h4>Stunts</h4>
-        <h4>Powers</h4>
+        {{#if stunts}}
+            <h4>Stunts</h4>
+            <ul class="stunts">
+                {{#each stunts}}
+                    <li><strong>{{stuntdisplay this}}:</strong> {{#markdown}}{{description}}{{/markdown}}</li>
+                {{/each}}
+            </ul>
+        {{/if}}
+        {{#if powers}}
+            <h4>Powers</h4>
+            <ul class="powers">
+                {{#each powers}}
+                    <li>
+                        <strong>{{powername}}</strong> [{{cost}}]
+                        {{#if extra}}{{extra}}{{/if}}
+                        {{#if description}}{{#markdown}}{{description}}{{/markdown}}{{/if}}
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
         <h4>Modes and Skills:</h4>
     </div>
   {{/each}}

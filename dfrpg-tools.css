@@ -18,6 +18,11 @@ body {
   color: #003459;
 }
 
+p {
+  display: inline;
+  padding: 0;
+}
+
 .dfrpg-card {
   float: left;
   margin: 10px;
