@@ -1,3 +1,6 @@
+NPCs = new Mongo.Collection("npcs");
+Powers = new Mongo.Collection("powers");
+
 var SKILL_RANKS = {
   '8': 'Legendary',
   '7': 'Epic',
@@ -13,8 +16,11 @@ var SKILL_RANKS = {
 };
 
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault('counter', 0);
+  Session.setDefault('editmode', false);
+
+  EditableText.userCanEdit = function(doc,Collection) {
+    return Session.get('editmode');
+  };
 
   Template.dfrpg_characters.helpers({
     characters: [
@@ -63,54 +69,9 @@ if (Meteor.isClient) {
   });
 
   Template.dfrpg_npcs.helpers({
-    characters: [
-      {
-        name: "Elder Gruff",
-        aspects: [
-          {aspectname: "Elder Gruff", type: 'highconcept'},
-          {aspectname: "Sense of Honor", type: 'other'},
-          {aspectname: "Sword as Long as a Car", type: 'other'}
-        ], skills: [
-          {
-            skillname: "Alertness",
-            rank: 2
-          },{
-            skillname: "Athletics",
-            rank: 3
-          },
-        ],
-        skillnotes: "Most other physical skills default to Fair, the rest to Average.",
-        stunts: [
-          {
-            stuntname: "Hunter",
-            stuntskill: "Survival",
-            description: "Use Survival instead of investigation when tracking prey."
-          }
-        ],
-        powers: [
-          {
-            powername: "Claws",
-            cost: -1,
-            description: "Fists gain **Weapon:2**"
-          },
-          {
-            powername: "Echoes of the Beast",
-            cost: -1,
-            extra: "(Goat)"
-          }
-        ]
-      },
-      {
-        name: "Goblin",
-        aspects: [
-          {aspectname: "Hunter Goblin", type: 'highconcept'}
-        ], skills: [
-        {
-          skillname: "Alertness",
-          rank: 2
-        }
-      ]}
-    ],
+    characters: function () {
+      return NPCs.find({});
+    },
     highconcept: function() {
       return this.aspects.filter(function(elem) {return elem.type==='highconcept'})[0].aspectname;
     },
@@ -120,6 +81,21 @@ if (Meteor.isClient) {
 
       return skillnames.join(', ');
     }
+  });
+
+  Template.dfrpg_power.helpers({
+    powerdata: function() {
+      var power = Powers.findOne({name: this.powername}) || {};
+      console.log(power);
+      for (var attrname in this) {
+        power[attrname] = this[attrname];
+      }
+      return power;
+    }
+  });
+
+  Template.registerHelper('userCanEdit', function() {
+    return Session.get('editmode');
   });
 
   Template.registerHelper('skilldisplay', function(rank) {
@@ -147,6 +123,56 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
+    Powers.remove({});
+    Powers.insert({name: 'Claws', cost: -1, quickref: 'Fists gain **Weapon:2**'});
+
     // code to run on server at startup
+    NPCs.remove({});
+    NPCs.insert({
+      name: "Elder Gruff",
+      aspects: [
+        {aspectname: "Elder Gruff", type: 'highconcept'},
+        {aspectname: "Sense of Honor", type: 'other'},
+        {aspectname: "Sword as Long as a Car", type: 'other'}
+      ], skills: [
+        {
+          skillname: "Alertness",
+          rank: 2
+        },{
+          skillname: "Athletics",
+          rank: 3
+        },
+      ],
+      skillnotes: "Most other physical skills default to Fair, the rest to Average.",
+      stunts: [
+        {
+          stuntname: "Hunter",
+          stuntskill: "Survival",
+          description: "Use Survival instead of investigation when tracking prey."
+        }
+      ],
+      powers: [
+        {
+          powername: "Claws",
+        },
+        {
+          powername: "Echoes of the Beast",
+          cost: -1,
+          extra: "(Goat)"
+        }
+      ],
+      notes: "Some notes"
+    });
+    NPCs.insert({
+      name: "Goblin",
+      aspects: [
+        {aspectname: "Hunter Goblin", type: 'highconcept'}
+      ], skills: [
+        {
+          skillname: "Alertness",
+          rank: 2
+        }
+      ]
+    });
   });
 }
